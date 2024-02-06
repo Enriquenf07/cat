@@ -1,19 +1,37 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import Title from "../components/Title";
 import Buttons from "../components/Buttons";
 import Upgrades from "../components/Upgrades";
+import useGameStore from "../../../store/useGameStore";
+import { numberformat } from "swarm-numberformat";
 
 
 export default function Rats() {
+    const rats = useGameStore(state => state.rats)
+
     return (
         <>
             <Title>Rats</Title>
-            <Typography>oi</Typography>
-            <Typography>oi</Typography>
-            <Typography>oi</Typography>
-            <Typography>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam ut nemo repudiandae, architecto aspernatur necessitatibus quidem hic modi, minima, odit ipsa ab cum optio distinctio facere suscipit vitae quo eos.</Typography>
-            <Buttons></Buttons>
-            <Upgrades></Upgrades>
+            <Typography variant="body2">You decide to hunt rats</Typography>
+            <Typography variant="body2">you have {numberformat.format(rats.number)} rats</Typography>
+            {   rats.upgrades.some(u => !u.isBought) &&
+                <Upgrades>
+                    {rats.upgrades.map(u => {
+                        if (!u.isBought) {
+                            return (
+                                <Box sx={{ marginBottom: '0.6rem' }} key={u.index}>
+                                    <Typography variant="body2">{u.title}</Typography>
+                                    <Typography variant="body2">{u.description}</Typography>
+                                    <Typography variant="body2">You need {numberformat.format(u.price)} rats</Typography>
+                                    <Button variant="outlined" fullWidth onClick={() => rats.buyUpgrade(u.index)}>Buy</Button>
+                                </Box>
+                            )
+                        }
+
+                    })}
+                </Upgrades>
+            }
+
         </>
     )
 }

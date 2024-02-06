@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify'
 import Router from './Router'
 import Menu from './Menu'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useGameLogic } from './GameLogic/useGameLogic'
 
 const theme = createTheme({
     palette: {
@@ -14,6 +15,9 @@ const theme = createTheme({
 
 function App() {
     const [index, setIndex] = useState(0)
+
+    useGameLogic()
+
     return (
         <>
             <ThemeProvider theme={theme}>
