@@ -5,6 +5,8 @@ import Upgrades from "../components/Upgrades";
 import useGameStore from "../../../store/useGameStore";
 import { numberformat } from "swarm-numberformat";
 
+import BuyButton from "../../../components/BuyButton";
+
 
 export default function Rats() {
     const rats = useGameStore(state => state.rats)
@@ -23,7 +25,7 @@ export default function Rats() {
                                     <Typography variant="body2">{u.title}</Typography>
                                     <Typography variant="body2">{u.description}</Typography>
                                     <Typography variant="body2">You need {numberformat.format(u.price)} rats</Typography>
-                                    <Button variant="outlined" fullWidth onClick={() => rats.buyUpgrade(u.index)}>Buy</Button>
+                                    <BuyButton onClick={() => rats.buyUpgrade(u.index)}/>
                                 </Box>
                             )
                         }

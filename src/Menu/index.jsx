@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Grid from '@mui/material/Grid';
-import { Paper } from '@mui/material';
+import { Divider, Paper, IconButton, Typography, useMediaQuery } from '@mui/material';
 import BottomNavigation from '@mui/material/BottomNavigation';
 import BottomNavigationAction from '@mui/material/BottomNavigationAction';
 import HomeIcon from '@mui/icons-material/Home';
@@ -26,7 +26,7 @@ export default function Menu({ setIndex, index }) {
         {
             id: 2,
             label: 'City',
-            icon: <LocationCityIcon/>,
+            icon: <LocationCityIcon />,
             initialCond: true
         },
         {
@@ -35,20 +35,37 @@ export default function Menu({ setIndex, index }) {
             icon: <SettingsIcon />,
             initialCond: true
         },
-        
+
     ]
-    
+
+    const isMobile = useMediaQuery('(max-width:700px)')
+
     return (
-        <Grid item xs={12}>
-            <Paper elevation={6} >
-                <BottomNavigation
-                    value={index}
-                >
-                    {MENU.map((item) => {
-                        return item.initialCond && <BottomNavigationAction key={item.id} label={item.label} icon={item.icon} onClick={() => setIndex(item.id)}/>
+        <>
+            <Grid item xs={12} container height={'100%'} flexDirection={isMobile ? 'row' : 'column'} justifyContent={!isMobile ? 'space-between' : 'center'} alignItems={isMobile && 'end'} style={{ paddingTop: !isMobile && '1rem' }}>
+                <Grid item container width={isMobile ? 'fit-content' : '100%'}>
+                    {MENU.slice(0, -1).map(i => {
+                        return (
+                            <>
+                                <Grid item container flexDirection={'column'} alignItems={'center'} xs={true} md={12} marginBottom={!isMobile && '0.6rem'}>
+                                    <IconButton sx={index == i.id && {bgcolor: 'secondary.light', '&:hover': {bgcolor: 'secondary.main'}}} onClick={() => setIndex(i.id)} aria-label="add to shopping cart">
+                                        {i.icon}
+                                    </IconButton>
+                                    {!isMobile && <Typography fontSize={'14px'}>{i.label}</Typography>}
+                                </Grid>
+                            </>
+
+                        )
                     })}
-                </BottomNavigation>
-            </Paper>
-        </Grid>
+                </Grid>
+                <Grid item container sx={{width: isMobile && 'fit-content'}} flexDirection={'column'}  alignItems={'center'}>
+                    <IconButton onClick={() => setIndex(MENU[MENU.length - 1].id)} aria-label="Settings">
+                        {MENU[MENU.length - 1].icon}
+                    </IconButton>
+                </Grid>
+            </Grid>
+
+        </>
+
     );
 }

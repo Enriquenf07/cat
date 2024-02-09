@@ -2,8 +2,7 @@ import { useState } from "react"
 import Rats from "../pages/Rats"
 import useGameStore from "../../../store/useGameStore"
 
-export default function useStatsMenu() {
-    const [index, setIndex] = useState(0)
+export default function useStatsMenu(index) {
     const ratsValue = useGameStore(state => state.rats.number)
 
     const statsButtons = [
@@ -36,7 +35,6 @@ export default function useStatsMenu() {
     
     return {
         buttons: statsButtons,
-        setIndex: setIndex,
         display: () => statsButtons[index].content
     }
 }

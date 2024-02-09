@@ -6,7 +6,7 @@ export default function Upgrades({children}) {
             <Box sx={{ marginBottom: '1rem', marginTop: '1rem' }}>
                 <Divider />
             </Box>
-            <Typography variant="h6" color={'primary'}>
+            <Typography variant="h6">
                 Upgrades
             </Typography>
             {children}
