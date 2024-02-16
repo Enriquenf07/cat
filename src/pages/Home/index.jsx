@@ -10,6 +10,7 @@ export default function Home() {
     const [isStatsVisible, setIsStatsVisible] = useState(true)
     const homeIndex = useGameStore(state => state.homeIndex)
     const menu = useStatsMenu(homeIndex)
+    
     return (
         <Grid item xs={12} md={12} sx={{ padding: '1.2rem' }}>
             {menu.display()}

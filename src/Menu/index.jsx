@@ -40,6 +40,8 @@ export default function Menu({ setIndex, index }) {
 
     const isMobile = useMediaQuery('(max-width:700px)')
 
+    
+
     return (
         <>
             <Grid item xs={12} container height={'100%'} flexDirection={isMobile ? 'row' : 'column'} justifyContent={!isMobile ? 'space-between' : 'center'} alignItems={isMobile && 'end'} style={{ paddingTop: !isMobile && '1rem' }}>
@@ -58,7 +60,7 @@ export default function Menu({ setIndex, index }) {
                         )
                     })}
                 </Grid>
-                <Grid item container sx={{width: isMobile && 'fit-content'}} flexDirection={'column'}  alignItems={'center'}>
+                <Grid item container sx={{width: isMobile ? 'fit-content' : '100%'}} flexDirection={'column'}  alignItems={'center'}>
                     <IconButton onClick={() => setIndex(MENU[MENU.length - 1].id)} aria-label="Settings">
                         {MENU[MENU.length - 1].icon}
                     </IconButton>

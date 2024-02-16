@@ -1,9 +1,11 @@
 import { useState } from "react"
 import Rats from "../pages/Rats"
 import useGameStore from "../../../store/useGameStore"
+import Hunting from "../pages/Hunting"
 
 export default function useStatsMenu(index) {
     const ratsValue = useGameStore(state => state.rats.number)
+    const huntingValue = useGameStore(state => state.hunting.number)
 
     const statsButtons = [
         {
@@ -15,20 +17,21 @@ export default function useStatsMenu(index) {
         },
         {
             id: 1,
-            title: 'oi',
+            title: 'Hunting',
             initialCond: true,
-            content: <>2</>
+            content: <Hunting/>,
+            quantity: huntingValue
         },
         {
             id: 2,
             title: 'oi',
-            initialCond: true,
+            initialCond: false,
             content: <>3</>
         },
         {
             id: 3,
             title: 'oi',
-            initialCond: true,
+            initialCond: false,
             content: <>4</>
         },
     ]

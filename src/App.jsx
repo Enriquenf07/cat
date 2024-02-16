@@ -58,32 +58,31 @@ function App() {
                 />
 
                 <Grid container height={'100lvh'} sx={{ bgcolor: 'primary.dark' }}>
-                    <Grid item container sx={{flexDirection: isMobile ? 'column-reverse' :'row'}} xs={12}>
-                        <Grid item width={!isMobile ? '4rem' : '100vw'} height={!isMobile && '99lvh'}>
+                    <Grid item container sx={{ flexDirection: isMobile ? 'column-reverse' : 'row' }} xs={12}>
+                        <Grid item width={!isMobile ? '4rem' : '100vw'} height={isMobile ? '10vh' : '95lvh'}>
                             <Menu index={index} setIndex={setIndex} />
                         </Grid>
-                        <Grid item width={'16rem'}>
+                        {!isMobile && <Grid item width={'16rem'}>
                             <Paper elevation={0} square={false}>
                                 <Grid height={!isMobile && '100lvh'} sx={{ bgcolor: 'primary.main' }} style={{ padding: '1rem' }}>
-                                    {statsMenu.buttons.map(b => {
-                                        return (
-                                            <>
-                                                <Grid xs={12}>
-                                                    <Button sx={{width: '100%', '&:hover': {bgcolor: 'grey.400'}, bgcolor: homeIndex == b.id && 'secondary.light'}} 
+                                    {statsMenu.buttons.map(b => (
+                                        <>
+                                            {b.initialCond && <Grid xs={12}>
+                                                <Button sx={{ width: '100%', '&:hover': { bgcolor: 'grey.400' }, bgcolor: homeIndex == b.id && 'secondary.light' }}
                                                     onClick={() => setHomeIndex(b.id)}
-                                                    >
-                                                        <Grid container width={'100%'} justifyContent={'space-between'}>
-                                                            <Typography color={'text.primary'}>{b.title}</Typography>
-                                                            <Typography color={'text.primary'}>{numberformat.formatShort(b.quantity ?? 0)}</Typography>
-                                                        </Grid>
-                                                    </Button>
-                                                </Grid>
-                                            </>
-                                        )
-                                    })}
+                                                >
+                                                    <Grid container width={'100%'} justifyContent={'space-between'}>
+                                                        <Typography color={'text.primary'}>{b.title}</Typography>
+                                                        <Typography color={'text.primary'}>{numberformat.formatShort(b.quantity ?? 0)}</Typography>
+                                                    </Grid>
+                                                </Button>
+                                            </Grid>}
+                                        </>
+                                    )
+                                    )}
                                 </Grid>
                             </Paper>
-                        </Grid>
+                        </Grid>}
                         <Grid item style={{ width: !isMobile && 'calc(100% - 20rem)' }}>
                             <Paper elevation={0} square={false}>
                                 <Router index={index} />

@@ -15,7 +15,7 @@ export default function Router({ index }) {
 
     return (
         <>
-        <Grid container sx={{ bgcolor: 'primary.light' }} item xs={12} height={!isMobile && '100lvh'}>
+        <Grid container sx={{ bgcolor: 'primary.light' }}  item xs={12} height={!isMobile ? '100lvh' : '90lvh'}>
             {page[index]}
         </Grid>
         </>
